@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ozon Puzzle</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        .body {
+            margin: auto;
+        }
+
+        .content {
+            margin: auto;
+            width: 750px;
+            height: 750px;
+            padding: 15px 20px 0 20px;
+            background-color: dimgrey;
+
+        }
+
+        .picture-part {
+            width: 155px;
+            height: 175px;
+            margin-top: 5px;
+            background-image: url(1007104545.jpg);
+        }
+
+        .part2 {
+            background-position: 100% 0;
+        }
+
+        .part3 {
+            background-position: 100% 100%;
+        }
+
+        .part4 {
+            background-position: 0 100%;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#draggable,#draggable2,#draggable3,#draggable4").draggable();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="content">
+        <div id="draggable" class="ui-widget-content picture-part part1"></div>
+        <div id="draggable2" class="ui-widget-content picture-part  part2"></div>
+        <div id="draggable3" class="ui-widget-content picture-part  part3"></div>
+        <div id="draggable4" class="ui-widget-content picture-part  part4"></div>
+    </div>
+
+</body>
+
+</html>
