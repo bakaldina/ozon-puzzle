@@ -5,26 +5,42 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ozon Puzzle</title>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-bootstrap/0.5pre/assets/css/bootstrap.min.css'>
     <style>
-        .body {
-            margin: auto;
+        body {
+            font-size: 0!important;
+            line-height: 0!important;
         }
 
-        .content {
+        .area {
             margin: auto;
             width: 750px;
             height: 750px;
             padding: 15px 20px 0 20px;
             background-color: dimgrey;
-
         }
 
-        .picture-part {
+        .drag-area {
+            width: 155px;
+            height: 700px;
+            display: inline-block;
+            vertical-align: top;
+            margin-right: 200px;
+            box-shadow: 0px 0px 14px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        .drag-area1 {
+            width: 310px;
+            height: 350px;
+            margin-right: 0;
+        }
+
+        .box {
             width: 155px;
             height: 175px;
-            margin-top: 5px;
             background-image: url(1007104545.jpg);
+            z-index: 2;
+            display: inline-block;
         }
 
         .part2 {
@@ -39,23 +55,44 @@
             background-position: 0 100%;
         }
     </style>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $(function () {
-            $("#draggable,#draggable2,#draggable3,#draggable4").draggable();
-        });
-    </script>
+
 </head>
 
 <body>
-    <div class="content">
-        <div id="draggable" class="ui-widget-content picture-part part1"></div>
-        <div id="draggable2" class="ui-widget-content picture-part  part2"></div>
-        <div id="draggable3" class="ui-widget-content picture-part  part3"></div>
-        <div id="draggable4" class="ui-widget-content picture-part  part4"></div>
+    <div class="area">
+        <div class="drag-area">
+            <div class="box box1 part1"></div>
+            <div class="box box1 part2"></div>
+            <div class="box box1 part3"></div>
+            <div class="box box1 part4"></div>
+        </div>
+        <div class="drag-area drag-area1">
+        </div>
     </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+    <script>
+        $(".box").draggable({
+            scope: 'demoBox',
+            start: function (event, ui) {
+                //Reset
+                $(".box").draggable("option", "revert", true);
+            }
+        });
 
+        $(".drag-area").droppable({
+            scope: 'demoBox',
+            drop: function (event, ui) {
+                var box = $(ui.draggable).html()
+                $(".box1").draggable("option", "revert", true);
+
+
+                //Realign item
+                $(ui.draggable).detach().css({ top: 0, left: 0 }).appendTo(this);
+            }
+        });
+
+    </script>
 </body>
 
 </html>
